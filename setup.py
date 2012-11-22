@@ -8,7 +8,7 @@ setup(
     version=version,
     author='Fernando Aramendi',
     author_email='fernando@devartis.com',
-    packages=['django-passbook', ],
+    packages=['django_passbook', ],
     url='http://github.com/devartis/django-passbook/',
     license=open('LICENSE.txt').read(),
     description='Django Passbook server app',

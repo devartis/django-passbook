@@ -13,7 +13,7 @@ class Pass(models.Model):
 class Registration(models.Model):
     device_library_identifier = models.CharField(max_length=50)
     push_token = models.CharField(max_length=50)
-    pass_ = models.ForeignKey(Pass)
+    pazz = models.ForeignKey(Pass)
 
     def __unicode__(self):
         return self.device_library_identifier

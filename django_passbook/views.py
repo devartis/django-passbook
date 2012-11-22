@@ -16,14 +16,14 @@ def register_pass(request, device_library_id, pass_type_id, serial_number):
         return HttpResponse(status=401)
 
     registration = Registration.objects.filter(device_library_identifier=device_library_id,
-                                               pass_=pass_)
+                                               pazz=pass_)
     if registration:
         return HttpResponse(status=200)
 
     body = json.loads(request.body)
     new_registration = Registration(device_library_identifier=device_library_id,                                    
                                     push_token=body['pushToken']
-                                    pass_=pass_)
+                                    pazz=pass_)
     new_registration.save()
 
     return HttpResponse(status=201)

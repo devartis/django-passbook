@@ -22,7 +22,7 @@ def register_pass(request, device_library_id, pass_type_id, serial_number):
 
     body = json.loads(request.body)
     new_registration = Registration(device_library_identifier=device_library_id,                                    
-                                    push_token=body['pushToken']
+                                    push_token=body['pushToken'],
                                     pazz=pass_)
     new_registration.save()
 

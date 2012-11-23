@@ -1,7 +1,8 @@
 import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django_passbook.models import Registration
+from django_passbook.models import Pass, Registration
+from django.shortcuts import get_object_or_404
 
 
 @csrf_exempt
@@ -39,4 +40,3 @@ def register_pass(request, device_library_id, pass_type_id, serial_number):
     # status = @registration.new_record? ? :created : :ok
     # @registration.save
     # head status
-    

@@ -3,6 +3,11 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django_passbook.models import Pass, Registration
 from django.shortcuts import get_object_or_404
+import django.dispatch
+
+
+pass_registered = django.dispatch.Signal(providing_args=["pazz",])
+pass_unregistered = django.dispatch.Signal(providing_args=["pazz",])
 
 
 @csrf_exempt
@@ -24,10 +29,12 @@ def register_pass(request, device_library_id, pass_type_id, serial_number):
                                         push_token=body['pushToken'],
                                         pazz=pass_)
         new_registration.save()
+        pass_registered.send(sender=self, pazz=pass_)
         return HttpResponse(status=201)
 
     elif request.method == 'DELETE':
         registration.delete()
+        pass_unregistered.send(sender=self, pazz=pass_)
         return HttpResponse(status=200)
 
     else:

@@ -39,3 +39,15 @@ def register_pass(request, device_library_id, pass_type_id, serial_number):
 
     else:
         return HttpResponse(status=400)
+
+
+def latest_version(request, pass_type_id, serial_number):
+
+    pass_ = get_object_or_404(
+        Pass.objects.filter(pass_type_identifier=pass_type_id,
+                            serial_number=serial_number))
+    if request.META['HTTP_AUTHORIZATION'] != 'ApplePass %s' % pass_.authentication_token:
+        return HttpResponse(status=401)
+
+    return pass_.data
+    

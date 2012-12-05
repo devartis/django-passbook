@@ -6,6 +6,7 @@ class Pass(models.Model):
     serial_number = models.CharField(max_length=50)
     authentication_token = models.CharField(max_length=50)
     data = models.TextField()
+    updated_at = models.DateField()
 
     def __unicode__(self):
         return self.serial_number

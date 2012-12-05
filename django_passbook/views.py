@@ -72,10 +72,10 @@ def latest_version(request, pass_type_id, serial_number):
     if request.META['HTTP_AUTHORIZATION'] != 'ApplePass %s' % pass_.authentication_token:
         return HttpResponse(status=401)
 
-    if stale?(last_modified: pass_.updated_at.utc):
-        return pass_.data
-    else:
-        return HttpResponse(status=304)
+    #if stale?(last_modified: pass_.updated_at.utc):
+    return HttpResponse(json.dumps(pass_.data), mimetype="application/json")
+    #else:
+    #    return HttpResponse(status=304)
 
 
 # Logging Errors

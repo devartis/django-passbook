@@ -82,9 +82,7 @@ def latest_version(request, pass_type_id, serial_number):
 @csrf_exempt
 def log(request):
 
-    # TODO: save logs
-    #params[:logs].each { |message| Passbook::Log.create(message: message) }
-    #l = Log(log)
-    #l.save()
-    print request.POST['log']
+    b = json.loads(request.body)
+    for m in b['logs']:
+        Log(message=m).save()
     return HttpResponse(status=200)

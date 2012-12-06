@@ -14,9 +14,10 @@ pass_unregistered = django.dispatch.Signal()
 # Getting the Serial Numbers for Passes Associated with a Device
 def registrations(request, device_library_id, pass_type_id):
 
-    passes = get_list_or_404(
-        Pass.objects.filter(registration__device_library_identifier=device_library_id,
-                            pass_type_identifier=pass_type_id))
+    passes = Pass.objects.filter(registration__device_library_identifier=device_library_id,
+                                 pass_type_identifier=pass_type_id)
+    if passes.count() == 0:
+        return HttpResponse(status=404)
 
     if 'passesUpdatedSince' in request.GET:
         passes = passes.filter(updated_at__gt=request.GET['passesUpdatedSince'])

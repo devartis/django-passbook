@@ -19,3 +19,10 @@ class Registration(models.Model):
 
     def __unicode__(self):
         return self.device_library_identifier
+
+
+class Log(models.Model):
+    message = models.TextField()
+
+    def __unicode__(self):
+        return self.message

@@ -15,8 +15,8 @@ pass_unregistered = django.dispatch.Signal()
 def registrations(request, device_library_id, pass_type_id):
 
     passes = get_list_or_404(
-        Pass.objects.filter(registration__device_library_identifier='335454ca0ffa039f96b85c8d8f73ae6f',
-                            pass_type_identifier='pass.com.cardgloo.sandbox'))
+        Pass.objects.filter(registration__device_library_identifier=device_library_id,
+                            pass_type_identifier=pass_type_id))
 
     if request.GET['passesUpdatedSince']:
         passes = passes.filter(updated_at__gt=request.GET['passesUpdatedSince'])

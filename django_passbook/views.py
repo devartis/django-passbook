@@ -1,7 +1,7 @@
 import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django_passbook.models import Pass, Registration
+from django_passbook.models import Pass, Registration, Log
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.db.models import Max
 import django.dispatch

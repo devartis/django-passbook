@@ -25,7 +25,7 @@ def registrations(request, device_library_id, pass_type_id):
     if passes:
         last_updated = passes.aggregate(Max('updated_at'))['updated_at__max']
         serial_numbers = [p.serial_number for p in passes.filter(updated_at=last_updated).all()]
-        response_data = {'lastUpdated': lastUpdated, 'serialNumbers': serialNumbers}
+        response_data = {'lastUpdated': last_updated, 'serialNumbers': serial_numbers}
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
     else:
         return HttpResponse(status=204)

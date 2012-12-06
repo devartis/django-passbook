@@ -18,7 +18,7 @@ def registrations(request, device_library_id, pass_type_id):
         Pass.objects.filter(registration__device_library_identifier=device_library_id,
                             pass_type_identifier=pass_type_id))
 
-    if request.GET['passesUpdatedSince']:
+    if 'passesUpdatedSince' in request.GET:
         passes = passes.filter(updated_at__gt=request.GET['passesUpdatedSince'])
 
     if passes:

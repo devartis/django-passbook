@@ -5,7 +5,7 @@ class Pass(models.Model):
     pass_type_identifier = models.CharField(max_length=50)
     serial_number = models.CharField(max_length=50)
     authentication_token = models.CharField(max_length=50)
-    data = models.TextField()
+    data = models.FileField(upload_to='passes')
     updated_at = models.DateField()
 
     def __unicode__(self):

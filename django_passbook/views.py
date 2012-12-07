@@ -1,6 +1,7 @@
 import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import condition
 from django_passbook.models import Pass, Registration, Log
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.db.models import Max
@@ -64,7 +65,13 @@ def register_pass(request, device_library_id, pass_type_id, serial_number):
         return HttpResponse(status=400)
 
 
+def latest_pass(request, pass_type_id, serial_number):
+    return Pass.objects.get(pass_type_identifier=pass_type_id,
+                               serial_number=serial_number).updated_at
+
+
 # Getting the Latest Version of a Pass
+@condition(last_modified_func=latest_pass)
 def latest_version(request, pass_type_id, serial_number):
 
     pass_ = get_object_or_404(
@@ -73,10 +80,10 @@ def latest_version(request, pass_type_id, serial_number):
     if request.META['HTTP_AUTHORIZATION'] != 'ApplePass %s' % pass_.authentication_token:
         return HttpResponse(status=401)
 
-    #if stale?(last_modified: pass_.updated_at.utc):
-    return HttpResponse(json.dumps(pass_.data), mimetype="application/json")
-    #else:
-    #    return HttpResponse(status=304)
+    response = HttpResponse(pass_.data.read(),
+                            content_type='application/vnd.apple.pkpass')
+    response['Content-Disposition'] = 'attachment; filename=pass.pkpass'
+    return response    
 
 
 # Errors logging

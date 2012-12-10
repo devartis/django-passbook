@@ -4,7 +4,7 @@
 django-passbook
 ===============
 
-This application implements the specified API for passbook webservices. It handles pass registration, updates and logging. It may be easily plugged to you django application by just adding the installed app and importing the urls. It is based on Apple's specificatin and Mattt's rails example (https://github.com/mattt/passbook_rails_example)
+This application implements the specified API for passbook webservices. It handles pass registration, updates and logging. It may be easily plugged to you django application by just adding the installed app and importing the urls. It is based on Apple's specification and Mattt's rails example (https://github.com/mattt/passbook_rails_example)
 
 > If you need to create passes (.pkpass files) in python you should check http.//github.com/devartis/passbook.
 

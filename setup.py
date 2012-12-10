@@ -3,7 +3,7 @@ from distutils.core import setup
 version = __import__('django_passbook').__version__
 
 setup(
-    name='Django Passbook',
+    name='django-passbook',
     version=version,
     author='Fernando Aramendi',
     author_email='fernando@devartis.com',

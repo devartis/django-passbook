@@ -37,13 +37,13 @@ def registrations(request, device_library_id, pass_type_id):
 @csrf_exempt
 def register_pass(request, device_library_id, pass_type_id, serial_number):
 
-    pass_ = get_object_or_404(
+    pazz = get_object_or_404(
         Pass.objects.filter(pass_type_identifier=pass_type_id,
                             serial_number=serial_number))
     if request.META['HTTP_AUTHORIZATION'] != 'ApplePass %s' % pass_.authentication_token:
         return HttpResponse(status=401)
     registration = Registration.objects.filter(device_library_identifier=device_library_id,
-                                               pazz=pass_)
+                                               pazz=pazz)
 
     if request.method == 'POST':
         if registration:
@@ -51,14 +51,14 @@ def register_pass(request, device_library_id, pass_type_id, serial_number):
         body = json.loads(request.body)
         new_registration = Registration(device_library_identifier=device_library_id,
                                         push_token=body['pushToken'],
-                                        pazz=pass_)
+                                        pazz=pazz)
         new_registration.save()
-        pass_registered.send(sender=pass_)
+        pass_registered.send(sender=pazz)
         return HttpResponse(status=201)
 
     elif request.method == 'DELETE':
         registration.delete()
-        pass_unregistered.send(sender=pass_)
+        pass_unregistered.send(sender=pazz)
         return HttpResponse(status=200)
 
     else:

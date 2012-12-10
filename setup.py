@@ -1,7 +1,6 @@
 from distutils.core import setup
 
 version = __import__('django_passbook').__version__
-#install_requires = open('requirements.txt').readlines(),
 
 setup(
     name='Django Passbook',
@@ -14,9 +13,7 @@ setup(
     description='Django Passbook server app',
     long_description=open('README.md').read(),
 
-    #download_url='http://pypi.python.org/packages/source/P/Passbook/Passbook-%s.tar.gz' % version,
-
-    #install_requires=install_requires,
+    download_url='http://pypi.python.org/packages/source/D/django-passbook/django-passbook-%s.tar.gz' % version,
 
     classifiers=[
         'Development Status :: 3 - Alpha',

@@ -2,6 +2,9 @@ from django.db import models
 
 
 class Pass(models.Model):
+    """
+    Pass instance
+    """
     pass_type_identifier = models.CharField(max_length=50)
     serial_number = models.CharField(max_length=50)
     authentication_token = models.CharField(max_length=50)
@@ -13,6 +16,9 @@ class Pass(models.Model):
 
 
 class Registration(models.Model):
+    """
+    Registration of a Pass on a device
+    """
     device_library_identifier = models.CharField(max_length=50)
     push_token = models.CharField(max_length=50)
     pazz = models.ForeignKey(Pass)
@@ -22,6 +28,9 @@ class Registration(models.Model):
 
 
 class Log(models.Model):
+    """
+    Log message sent by a device
+    """
     message = models.TextField()
 
     def __unicode__(self):

@@ -22,6 +22,13 @@ $ pip install django-passbook
 
 Add 'django_passbook' to you installed apps in the settings.py file.
 
+To use push notifications you need to specify the path to your certificate and key files in your settings.py file.
+
+```
+PASSBOOK_CERT = '/home/faramendi/my-site/cert.pem'
+PASSBOOK_CERT_KEY = '/home/faramendi/my-site/key-nopass.pem'
+```
+
 You should also import the urls in your site urls.
 ```
 from django_passbook import urls

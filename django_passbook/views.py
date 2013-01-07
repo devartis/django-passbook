@@ -22,7 +22,7 @@ def registrations(request, device_library_id, pass_type_id):
         return HttpResponse(status=404)
 
     if 'passesUpdatedSince' in request.GET:
-        passes = passes.filter(updated_at__gt=datetime.strptime(request.GET['passesUpdatedSince'], FORMAT)
+        passes = passes.filter(updated_at__gt=datetime.strptime(request.GET['passesUpdatedSince'], FORMAT))
 
     if passes:
         last_updated = passes.aggregate(Max('updated_at'))['updated_at__max']

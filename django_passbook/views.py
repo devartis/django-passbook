@@ -8,8 +8,6 @@ from django.db.models import Max
 import django.dispatch
 
 FORMAT = '%Y-%m-%d %H:%M:%S'
-
-
 pass_registered = django.dispatch.Signal()
 pass_unregistered = django.dispatch.Signal()
 
@@ -43,7 +41,7 @@ def register_pass(request, device_library_id, pass_type_id, serial_number):
     pazz = get_object_or_404(
         Pass.objects.filter(pass_type_identifier=pass_type_id, serial_number=serial_number))
 
-    if request.META['HTTP_AUTHORIZATION'] != 'ApplePass %s' % pass_.authentication_token:
+    if request.META['HTTP_AUTHORIZATION'] != 'ApplePass %s' % pazz.authentication_token:
         return HttpResponse(status=401)
 
     registration = Registration.objects.filter(device_library_identifier=device_library_id,

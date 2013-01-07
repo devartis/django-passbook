@@ -14,6 +14,9 @@ class Pass(models.Model):
     def __unicode__(self):
         return self.serial_number
 
+    class Meta:
+        unique_together = (('pass_type_identifier', 'serial_number'),)
+
 
 class Registration(models.Model):
     """

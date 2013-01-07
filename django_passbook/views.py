@@ -6,6 +6,7 @@ from django_passbook.models import Pass, Registration, Log
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.db.models import Max
 import django.dispatch
+from datetime import datetime
 
 FORMAT = '%Y-%m-%d %H:%M:%S'
 pass_registered = django.dispatch.Signal()

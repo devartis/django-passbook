@@ -17,7 +17,7 @@ Getting Started
 ===============
 
 ```
-$ pip install django-passbook
+$ pip install django-passbook==0.1.0dev
 ```
 
 Add 'django_passbook' to you installed apps in the settings.py file.
